@@ -6,7 +6,8 @@ import os
 import rospy
 import tensorflow as tf
 
-from traffic_light_colors import TrafficLight
+#from traffic_light_colors import TrafficLight#enum in traffi clight colours was a problem in the test
+from styx_msgs.msg import TrafficLight # for traffic light colour values
 
 class ColorClassifier:
     def __init__(self):

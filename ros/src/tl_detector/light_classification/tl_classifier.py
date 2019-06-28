@@ -8,7 +8,8 @@ import numpy as np
 
 from object_classifier import ObjectClassifier
 from color_classifier import ColorClassifier
-from traffic_light_colors import TrafficLight
+#from traffic_light_colors import TrafficLight #had isseus around the emun import so useing styx.msg below
+from styx_msgs.msg import TrafficLight
 import rospy
 
 class TLClassifier(object):
@@ -35,7 +36,8 @@ class TLClassifier(object):
 
         traffic_light_color = self.color_classifier.predict_images(traffic_light_images)
 
-        rospy.loginfo('Traffic light detected {}'.format(TrafficLight(traffic_light_color)))
+        rospy.loginfo('Traffic light detected {}'.format(traffic_light_color))
+        #changed bacue now using styx msg #TrafficLight(traffic_light_color)))
 
         return traffic_light_color
 
