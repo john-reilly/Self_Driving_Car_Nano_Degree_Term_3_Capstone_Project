@@ -72,10 +72,11 @@ class WaypointUpdater(object):
     def get_closest_waypoint_idx(self):#added x here video did not have it
         x = self.pose.pose.position.x
         y = self.pose.pose.position.y
-        if self.waypoint_tree :# i want to see does it exist these lines seem to do nothing think I need special ros log output
-            print("waypoint tree status: exists")  
-        if not self.waypoint_tree :# i want to see does it exist
-            print("waypoint tree status: exists") 
+        #below if statement was early experiment prints not needed....
+        #if self.waypoint_tree :# i want to see does it exist these lines seem to do nothing think I need special ros log output
+        #    print("waypoint tree status: exists")  
+        #if not self.waypoint_tree :# i want to see does it exist
+        #    print("waypoint tree status: exists") 
         
                   
         closest_idx =  self.waypoint_tree.query([x,y], 1 )[1] # was ([x,y], 1 )[1] see below 
@@ -119,8 +120,10 @@ class WaypointUpdater(object):
         #lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
         if (self.stopline_wp_idx == -1) or (self.stopline_wp_idx >= farthest_idx):
             lane.waypoints = base_waypoints
+            rospy.loginfo('In generate lane if statement:')
         else:
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
+            rospy.loginfo('In generate lane else statement:')
 
         return lane
 
@@ -158,6 +161,7 @@ class WaypointUpdater(object):
 
     def waypoints_cb(self, waypoints):
         # TODO: Implement
+        rospy.loginfo('In waypoints_cb :')
         self.base_waypoints = waypoints
         if not self.waypoints_2d:
             self.waypoints_2d = [ [ waypoint.pose.pose.position.x , waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints ]
@@ -168,7 +172,9 @@ class WaypointUpdater(object):
         # TODO: Callback for /traffic_waypoint message. Implement
         # pass
         #From John next line added to get a value for self.stopline_wp_idx from /traffic_waypoint 
-        self.stopline_wp_idx = msg.data
+        self.stopline_wp_idx = msg#.data #taking out data as experiment
+        rospy.loginfo('In traffic_cb self.stopline_wp_idx is : {}'.format(self.stopline_wp_idx) )
+        #rospy.loginfo('Color pred {} with prob {}'.format(pred, prob))
 
     def obstacle_cb(self, msg):
         # TODO: Callback for /obstacle_waypoint message. We will implement it later

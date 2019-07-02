@@ -33,7 +33,9 @@ class TLClassifier(object):
 
         # step 1
         traffic_light_images = self.object_classifier.get_traffic_light_images(image)
-
+        
+        #john there might be a probelm here what if there are 1 or 3 predictions how does that effect below?
+        # eventually this gets passed back to tl_detector and is a singluar state maybe this sia problem?
         traffic_light_color = self.color_classifier.predict_images(traffic_light_images)
 
         rospy.loginfo('Traffic light detected {}'.format(traffic_light_color))
