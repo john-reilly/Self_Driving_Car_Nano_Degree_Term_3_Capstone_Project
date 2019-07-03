@@ -136,6 +136,7 @@ class TLDetector(object):
             self.last_wp = light_wp
             self.upcoming_red_light_pub.publish(Int32(light_wp))
             
+            
             rospy.loginfo('In tl_detector elif section light_wp:{}'.format(Int32(self.last_wp) ) )
         else:
             self.upcoming_red_light_pub.publish(Int32(self.last_wp))

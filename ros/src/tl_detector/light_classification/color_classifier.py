@@ -24,8 +24,8 @@ class ColorClassifier:
             preds = self.class_model.predict_classes(x)
             prob = self.class_model.predict_proba(x)
 
-        #return preds[0], prob[0]
-        return TrafficLight.RED, prob[0]# i am making it alway return RED as a test
+        return preds[0], prob[0]
+        #return TrafficLight.RED, prob[0]# i am making it alway return RED as a test
 
     def predict_images(self, images):
         predictions = []
