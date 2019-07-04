@@ -34,6 +34,9 @@ class ColorClassifier:
             #rospy.loginfo('Color pred {} with prob'.format(pred, prob))
             rospy.loginfo('Color pred {} with prob {}'.format(pred, prob)) #john added {} here missing?
             predictions.append(pred)
+            # added by John to force a return on detection of even one red
+            if (pred == 0): return TrafficLight.RED
+            
         if len(predictions) > 0:
             return max(predictions, key=predictions.count)
         else:

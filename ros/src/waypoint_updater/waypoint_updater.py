@@ -130,15 +130,18 @@ class WaypointUpdater(object):
             #experiment
             #lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)# I want to see will this cause it to stop
             
-            rospy.loginfo('In generate lane if statement:')
+            #rospy.loginfo('In generate lane if statement:')
+            rospy.loginfo('In generate lane if statement stopline is:{}'.format(self.stopline_wp_idx))
             
         else:
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
-            rospy.loginfo('In generate lane else statement:')
+            #rospy.loginfo('In generate lane else statement:')
+            rospy.loginfo('In generate lane Else statement stopline is:{}'.format(self.stopline_wp_idx))
 
         return lane
 
     def decelerate_waypoints(self, waypoints, closest_idx):
+        rospy.loginfo('In decelerate waypoints stopline:{}'.format(self.stopline_wp_idx))
         temp = []
         for i, wp in enumerate(waypoints):
 
