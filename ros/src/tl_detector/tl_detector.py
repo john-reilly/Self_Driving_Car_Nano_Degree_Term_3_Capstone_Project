@@ -117,6 +117,13 @@ class TLDetector(object):
         #elif self.count == self.frame_sample_rate :
         #    self.count = 0 #reset the counter and continue
         #END of JOHN's addition
+        #############
+        #John is adding a part here to deal with the error in the second submission, which was some errors thrown after the image_cb was woprking but before the tl_classifier was initialiasted. In the site this was several errors that seemed to have little effect but we want to deal with them anyway
+        
+        if not self.light_classifier :
+            return
+        ##end of extra return section ....John
+        
         self.has_image = True
         self.camera_image = msg
         light_wp, state = self.process_traffic_lights()
