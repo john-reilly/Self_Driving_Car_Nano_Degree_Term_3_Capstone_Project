@@ -53,11 +53,13 @@ class TLDetector(object):
 
         config_string = rospy.get_param("/traffic_light_config")
         self.config = yaml.load(config_string)
+        #john adding site or sim boolean as suggested in section 9 of classroom
+        self.is_site = self.config['is_site'] # this gets sent to the classifier below
 
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
 
         self.bridge = CvBridge()
-        self.light_classifier = TLClassifier()
+        self.light_classifier = TLClassifier(self.is_site)#adding is_site boolean from above
         self.listener = tf.TransformListener()
 
         self.state = TrafficLight.UNKNOWN
